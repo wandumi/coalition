@@ -102,7 +102,8 @@
                                     </td>
                                     <td>
 
-                                        <a class="btn btn-sm btn-info" id="showEdit" href=""
+                                        <a class="btn btn-sm btn-info" id="showEdit"
+                                            href="{{ url('json_form/' . $json['unique_id'] . '/edit') }}"
                                             data-announcementEdit="">Edit</a>
 
                                     </td>

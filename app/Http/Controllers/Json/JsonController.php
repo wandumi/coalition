@@ -66,7 +66,19 @@ class JsonController extends Controller
      */
     public function edit(string $id)
     {
-        //
+
+        $getFile = storage_path('app/json_data.json');
+        $jsonData = [];
+
+        if (file_exists($getFile)) {
+            $jsonData = json_decode(file_get_contents($getFile), true);
+        }
+
+        $json = collect($jsonData)->firstWhere('unique_id', $id);
+
+
+        return view('JsonFiles.edit', compact('json'));
+        
     }
 
     

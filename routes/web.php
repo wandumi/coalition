@@ -20,3 +20,4 @@ Route::get('/', function () {
 
 Route::get('/json_form', [JsonController::class, 'index']);
 Route::post('/json_form', [JsonController::class, 'store']);
+Route::get('/json_form/{id}/edit', [JsonController::class, 'edit']);
