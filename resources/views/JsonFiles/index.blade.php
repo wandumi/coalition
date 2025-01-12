@@ -80,33 +80,35 @@
                     </thead>
                     <tbody>
 
-                        @foreach ($jsonData as $json)
-                            <tr>
-                                <td>
-                                    {{ $json['product_name'] }}
-                                </td>
+                        @if ($jsonData != null)
+                            @foreach ($jsonData as $json)
+                                <tr>
+                                    <td>
+                                        {{ $json['product_name'] }}
+                                    </td>
 
-                                <td>
-                                    {{ $json['quantity_stock'] }}
-                                </td>
+                                    <td>
+                                        {{ $json['quantity_stock'] }}
+                                    </td>
 
-                                <td>
-                                    {{ $json['item_price'] }}
-                                </td>
-                                <td>
-                                    {{ $json['current_date'] }}
-                                </td>
-                                <td>
-                                    {{ '$ ' . number_format($json['total_value'], 2) }}
-                                </td>
-                                <td>
+                                    <td>
+                                        {{ $json['item_price'] }}
+                                    </td>
+                                    <td>
+                                        {{ $json['current_date'] }}
+                                    </td>
+                                    <td>
+                                        {{ '$ ' . number_format($json['total_value'], 2) }}
+                                    </td>
+                                    <td>
 
-                                    <a class="btn btn-sm btn-info" id="showEdit" href=""
-                                        data-announcementEdit="">Edit</a>
+                                        <a class="btn btn-sm btn-info" id="showEdit" href=""
+                                            data-announcementEdit="">Edit</a>
 
-                                </td>
-                            </tr>
-                        @endforeach
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @endif
 
 
                     </tbody>
