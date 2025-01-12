@@ -21,9 +21,11 @@ class JsonController extends Controller
             $jsonData = json_decode(file_get_contents($getFile), true); 
         }
 
-        usort($jsonData, function ($a, $b) { 
-            return Carbon::parse($b['current_date'])->timestamp - Carbon::parse($a['current_date'])->timestamp; 
-        });
+        if ($jsonData != null){
+            usort($jsonData, function ($a, $b) { 
+                return Carbon::parse($b['current_date'])->timestamp - Carbon::parse($a['current_date'])->timestamp; 
+            });
+        }
 
         return view('JsonFiles.index', compact('jsonData'));
     }
@@ -40,6 +42,7 @@ class JsonController extends Controller
             'item_price' => 'required|integer', 
         ]);
 
+        $data = array_merge(['unique_id' => uniqid()], $data);
         $data['current_date'] = Carbon::now()->toDateTimeString();
         $data['total_value'] = $data['quantity_stock'] * $data['item_price'];
 
@@ -63,7 +66,19 @@ class JsonController extends Controller
      */
     public function edit(string $id)
     {
-        //
+
+        $getFile = storage_path('app/json_data.json');
+        $jsonData = [];
+
+        if (file_exists($getFile)) {
+            $jsonData = json_decode(file_get_contents($getFile), true);
+        }
+
+        $json = collect($jsonData)->firstWhere('unique_id', $id);
+
+
+        return view('JsonFiles.edit', compact('json'));
+        
     }
 
     
